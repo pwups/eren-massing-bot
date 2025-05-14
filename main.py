@@ -193,27 +193,6 @@ class QuizView(discord.ui.View):
     def __init__(self, question_data, index, score, callback_func):
         super().__init__(timeout=60)
         self.add_item(QuizSelect(question_data, index, score, callback_func))
-
-@bot.tree.command(name="cruel", description="this world is cruel but i still love you  ֪  ׂ ୭")
-async def cruel(interaction: discord.Interaction):
-    embed = discord.Embed()
-    embed.set_image(url=image_links[0])
-    await interaction.response.send_message("_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _", embed=embed)
-    await send_question(interaction, 0, 0)
-
-async def send_question(interaction, index, score):
-    if index >= len(quiz_questions):
-        # Final score
-        embed = discord.Embed()
-        embed.set_image(url=image_links[-1])
-        await interaction.channel.send(content=f"_ _\n\n　　　　　　ৎ.⠀⟡₊⠀ you got **{score} / {len(quiz_questions)}** e\n\n_ _", embed=embed)
-        return
-
-    question_data = quiz_questions[index]
-    embed = discord.Embed()
-    embed.set_image(url=image_links[index + 1])
-    view = QuizView(question_data, index, score, send_question)
-    await interaction.channel.send(content=f"**Question {index + 1}:** {question_data['question']}", embed=embed, view=view)
         
 # ----- Slash Commands -----
 @bot.tree.command(name="freedom", description="this is freedom  ֪  ׂ ୭")
@@ -378,6 +357,27 @@ async def sep_over(ctx):
         await ctx.send("I don't have permission to rename the channel.", delete_after=5)
     except Exception as e:
         await ctx.send(f"An error occurred: {e}", delete_after=5)
+
+@bot.tree.command(name="cruel", description="this world is cruel but i still love you  ֪  ׂ ୭")
+async def cruel(interaction: discord.Interaction):
+    embed = discord.Embed()
+    embed.set_image(url=image_links[0])
+    await interaction.response.send_message("_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _", embed=embed)
+    await send_question(interaction, 0, 0)
+
+async def send_question(interaction, index, score):
+    if index >= len(quiz_questions):
+        # Final score
+        embed = discord.Embed()
+        embed.set_image(url=image_links[-1])
+        await interaction.channel.send(content=f"_ _\n\n　　　　　　ৎ.⠀⟡₊⠀ you got **{score} / {len(quiz_questions)}** e\n\n_ _", embed=embed)
+        return
+
+    question_data = quiz_questions[index]
+    embed = discord.Embed()
+    embed.set_image(url=image_links[index + 1])
+    view = QuizView(question_data, index, score, send_question)
+    await interaction.channel.send(content=f"**Question {index + 1}:** {question_data['question']}", embed=embed, view=view)
 
 # ----- Events -----
 @bot.event
