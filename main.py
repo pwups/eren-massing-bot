@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from keep_aLive import keep_alive
+from keep_alive import keep_alive
 from discord import app_commands
 import asyncio
 import os
