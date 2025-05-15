@@ -368,9 +368,13 @@ async def sep_over(ctx):
 @bot.tree.command(name="cruel", description="this world is cruel but i still love you　 ֪  ׂ ୭")
 async def cruel(interaction: discord.Interaction):
     embed = discord.Embed()
-    embed.set_image(url=image_links[0])
-    await interaction.response.send_message("_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _", embed=embed)
-    await send_question(interaction, 0, 0)
+    embed.set_image(url=image_links[0])  # Start image
+    await interaction.response.send_message(
+        content="_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _",
+        embed=embed
+    )
+    message = await interaction.original_response()
+    await send_question(interaction, message, 0, 0)
 
 async def send_question(interaction, message, index, score):
     if index >= len(quiz_questions):
