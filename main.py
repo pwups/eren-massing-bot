@@ -233,7 +233,7 @@ async def lose(interaction: discord.Interaction):
         f"_ \n\n\n _　　　　<:eren4:1372394683501776967>          ⁺     ⊹\n_ _　　　　{channel.mention}\n\n\n_ _"
     )
 
-@bot.tree.command(name="dreams", description="finished　⊹　　　₊　　　⁺")
+@bot.tree.command(name="dreams", description="see you later, eren　 ֪  ׂ ୭")
 async def nobody(interaction: discord.Interaction):
     embed = discord.Embed()
     embed.set_image(url="https://media.discordapp.net/attachments/1371835441010966558/1372065583008317583/IMG_3859.jpg?ex=68256b26&is=682419a6&hm=c87fab666f9625b4141e490b73413f7c509b9bd76487499c2b147d2207d7235e&=&format=webp&width=550&height=309")
