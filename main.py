@@ -49,7 +49,7 @@ quiz_questions = [
         "answer": "accessing the basement"
     },
     {
-        "question": "what shocking truth does eren learn from the basement?",
+        "question": "<:invisible_emt:1372062781603446807>what shocking truth does\n<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>eren learn from the basement?",
         "options": ["titans are immortal", "marley is behind the titan attacks", "the world outside is destroyed", "titans come from another dimension"],
         "answer": "marley is behind the titan attacks"
     }
@@ -374,6 +374,7 @@ async def cruel(interaction: discord.Interaction):
         embed=embed
     )
     message = await interaction.original_response()
+    await asyncio.sleep(7)
     await send_question(interaction, message, 0, 0)
 
 async def send_question(interaction, message, index, score):
