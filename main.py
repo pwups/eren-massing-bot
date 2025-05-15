@@ -19,8 +19,8 @@ bot = commands.Bot(command_prefix="e?", intents=intents)
 # IDs
 CATEGORY_ID = 1372050909332373624
 TARGET_CHANNEL_ID_NOTIFICATION = 1371876364457873509
-TARGET_CHANNEL_ID_DONE = 1366077173223391303
-TARGET_CHANNEL_ID_TICKET = 1371876390856818718
+TARGET_CHANNEL_ID_DONE = 1371876390856818718
+TARGET_CHANNEL_ID_TICKET = 1371876418019135518
 REQUIRED_ROLE_ID = 1372051652952981636
 
 # Colors
@@ -141,7 +141,7 @@ class NotificationModal(discord.ui.Modal, title="(⁠ྀི´⁠ > ⁠.̫⁠ ⁠
         target_channel = interaction.guild.get_channel(TARGET_CHANNEL_ID_NOTIFICATION)
         if target_channel:
             await target_channel.send(
-                f"_ _⠀⠀⠀⠀⏝ི✿   ͚֯ ⠀⠀   ┼┼         {user.mention}      ◯ ⠀⠀ ˚\n⠀⠀⠀⠀    ⠀♥︎ʕ•͓͡•ʔ<:surveycorps:1372037777922719787>  ⠀   ׅ      ⠀{current_channel.mention}  ⠀⠀⠀⠀  ˖ ⿴݃ \n⠀ **{self.sep_time.value}**      ━─      ˚̩̩̥·       {self.urgency.value}⠀⠀**{self.notification.value}**⠀  ⋆ ⁺"
+                f"_ _⠀⠀⠀⠀ི✿   ͚֯ ⠀⠀   ┼┼         {user.mention}      ◯ ⠀⠀ ˚\n⠀⠀⠀⠀    ⠀♥︎ʕ•͓͡•ʔ<:surveycorps:1372037777922719787>  ⠀   ׅ      ⠀{current_channel.mention}  ⠀⠀⠀⠀  ˖ ⿴݃ \n⠀ **{self.sep_time.value}**      ━─      ˚̩̩̥·       {self.urgency.value}⠀⠀**{self.notification.value}**⠀  ⋆ ⁺"
             )
         try:
             await current_channel.edit(name=f"{user.name}﹕{self.sep_time.value}﹕{self.notification.value}")
@@ -176,27 +176,33 @@ class RegretButtonView(discord.ui.View):
         )
 
 class QuizSelect(discord.ui.Select):
-    def __init__(self, question_data, index, score, callback_func):
+    def __init__(self, question_data, index, score, message, interaction):
         self.correct_answer = question_data["answer"]
         self.score = score
         self.index = index
-        self.callback_func = callback_func
+        self.message = message
+        self.interaction = interaction
         options = [discord.SelectOption(label=o) for o in question_data["options"]]
         super().__init__(placeholder="𝐜𝐡𝐨𝐨𝐬𝐞 𝐲𝐨𝐮𝐫 𝐚𝐧𝐬𝐰𝐞𝐫 ✟", min_values=1, max_values=1, options=options)
 
     async def callback(self, interaction: Interaction):
+        if interaction.user != self.interaction.user:
+            await interaction.response.send_message("You're not allowed to answer this quiz.", ephemeral=True)
+            return
+
         if self.values[0] == self.correct_answer:
             self.score += 1
+
         await interaction.response.defer()
-        await self.callback_func(interaction, self.index + 1, self.score)
+        await send_question(self.interaction, self.message, self.index + 1, self.score)
 
 class QuizView(discord.ui.View):
-    def __init__(self, question_data, index, score, callback_func):
+    def __init__(self, question_data, index, score, message, interaction):
         super().__init__(timeout=60)
-        self.add_item(QuizSelect(question_data, index, score, callback_func))
+        self.add_item(QuizSelect(question_data, index, score, message, interaction))
         
 # ----- Slash Commands -----
-@bot.tree.command(name="freedom", description="this is freedom  ֪  ׂ ୭")
+@bot.tree.command(name="freedom", description="this is freedom　 ֪  ׂ ୭")
 async def lose(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
     guild = interaction.guild
@@ -224,7 +230,7 @@ async def lose(interaction: discord.Interaction):
     view.original_message = message
 
     await interaction.followup.send(
-        f"_ \n\n\n _　　　　<:blue_flower:1367358723269595249>          ⁺     ⊹\n_ _　　　　{channel.mention}\n\n\n_ _"
+        f"_ \n\n\n _　　　　<:eren4:1372394683501776967>          ⁺     ⊹\n_ _　　　　{channel.mention}\n\n\n_ _"
     )
 
 @bot.tree.command(name="dreams", description="finished　⊹　　　₊　　　⁺")
@@ -232,7 +238,7 @@ async def nobody(interaction: discord.Interaction):
     embed = discord.Embed()
     embed.set_image(url="https://media.discordapp.net/attachments/1371835441010966558/1372065583008317583/IMG_3859.jpg?ex=68256b26&is=682419a6&hm=c87fab666f9625b4141e490b73413f7c509b9bd76487499c2b147d2207d7235e&=&format=webp&width=550&height=309")
     await interaction.response.send_message(
-        content="_ _\n　　　✧ ‿︵ 　~~    　　~~ 　戦わなければ勝てない。\n_ _",
+        content="_ _\n　　　✧ ‿︵ 　~~    　~~ 　戦わなければ勝てない。\n_ _",
         embed=embed,
         view=ClickMeView()
     )
@@ -303,7 +309,7 @@ class CloseTicketView(discord.ui.View):
 
 @bot.tree.command(
     name="right",
-    description="being right means believing strongly in yourself  ֪  ׂ ୭"
+    description="being right means believing strongly in yourself　 ֪  ׂ ୭"
 )
 @app_commands.describe(
     invites=". invites gained",
@@ -346,7 +352,7 @@ async def regret(
 
 @bot.command(name="a")
 async def approve(ctx):
-    await ctx.send("_ _\n⠀ ⠀⠀⠀⏝ི⠀⠀⠀  ⠀❤︎⠀⠀⠀𝐜𝐡𝐞𝐜𝐤𝐩𝐨𝐢𝐧𝐭𝐬ㅤrequired\n⠀⠀⠀⠀𝐧𝐨𝐭 𝐩𝐨𝐬𝐭𝐢𝐧𝐠 𝐲𝐞𝐭 = 𝐝𝐨𝐧'𝐭 𝐣𝐨𝐢𝐧⠀⠀<:eren:1372038577940074608>◌⠀  ゜\n⠀⠀⠀   ৴৴    ׄ  ⠀⠀  __24h __    to    post,     **1d   max**   ext.\n_ _")
+    await ctx.send("_ _\n⠀ ⠀⠀⠀⏝ི⠀⠀⠀  ⠀❤︎⠀⠀⠀𝐜𝐡𝐞𝐜𝐤𝐩𝐨𝐢𝐧𝐭𝐬ㅤ[required](https://discord.gg/SAzqaQuCQA )\n⠀⠀⠀⠀𝐧𝐨𝐭 𝐩𝐨𝐬𝐭𝐢𝐧𝐠 𝐲𝐞𝐭 = 𝐝𝐨𝐧'𝐭 𝐣𝐨𝐢𝐧⠀⠀<:eren:1372038577940074608>◌⠀  ゜\n⠀⠀⠀   ৴৴    ׄ  ⠀⠀  __24h __    to    post,     **1d   max**   ext.\n_ _")
 
 @bot.command(name="d")
 async def sep_over(ctx):
@@ -359,26 +365,25 @@ async def sep_over(ctx):
     except Exception as e:
         await ctx.send(f"An error occurred: {e}", delete_after=5)
 
-@bot.tree.command(name="cruel", description="this world is cruel but i still love you  ֪  ׂ ୭")
+@bot.tree.command(name="cruel", description="this world is cruel but i still love you　 ֪  ׂ ୭")
 async def cruel(interaction: discord.Interaction):
     embed = discord.Embed()
     embed.set_image(url=image_links[0])
     await interaction.response.send_message("_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _", embed=embed)
     await send_question(interaction, 0, 0)
 
-async def send_question(interaction, index, score):
+async def send_question(interaction, message, index, score):
     if index >= len(quiz_questions):
-        # Final score
         embed = discord.Embed()
         embed.set_image(url=image_links[-1])
-        await interaction.channel.send(content=f"_ _\n\n　　　　　　ৎ.⠀⟡₊⠀ you got **{score} / {len(quiz_questions)}** e\n\n_ _", embed=embed)
+        await message.edit(content=f"_ _\n\n　　　　　　ৎ ⠀⟡₊⠀ you got **{score} / {len(quiz_questions)}** <a:spins:1372397905637539860>\n\n_ _", embed=embed, view=None)
         return
 
     question_data = quiz_questions[index]
     embed = discord.Embed()
     embed.set_image(url=image_links[index + 1])
-    view = QuizView(question_data, index, score, send_question)
-    await interaction.channel.send(content=f"**Question {index + 1}:** {question_data['question']}", embed=embed, view=view)
+    view = QuizView(question_data, index, score, message, interaction)
+    await message.edit(content=f"<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>{question_data['question']}", embed=embed, view=view)
 
 # ----- Events -----
 @bot.event
@@ -390,7 +395,7 @@ async def on_ready():
     except Exception as e:
         print(e)
     activity = discord.Streaming(
-        name="the rumbling ♬⊹",
+        name="the rumbling ♬",
         url="https://www.twitch.tv/sexcmiel"
     )
     await bot.change_presence(status=discord.Status.idle, activity=activity)
