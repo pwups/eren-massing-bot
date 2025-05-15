@@ -49,7 +49,7 @@ quiz_questions = [
         "answer": "accessing the basement"
     },
     {
-        "question": "<:invisible_emt:1372062781603446807>what shocking truth does\n<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>eren learn from the basement?",
+        "question": "<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>what shocking truth does\n<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>eren learn from the basement?",
         "options": ["titans are immortal", "marley is behind the titan attacks", "the world outside is destroyed", "titans come from another dimension"],
         "answer": "marley is behind the titan attacks"
     }
