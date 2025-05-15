@@ -141,7 +141,7 @@ class NotificationModal(discord.ui.Modal, title="(⁠ྀི´⁠ > ⁠.̫⁠ ⁠
         target_channel = interaction.guild.get_channel(TARGET_CHANNEL_ID_NOTIFICATION)
         if target_channel:
             await target_channel.send(
-                f"_ _⠀⠀⠀⠀ི✿   ͚֯ ⠀⠀   ┼┼         {user.mention}      ◯ ⠀⠀ ˚\n⠀⠀⠀⠀    ⠀♥︎ʕ•͓͡•ʔ<:surveycorps:1372037777922719787>  ⠀   ׅ      ⠀{current_channel.mention}  ⠀⠀⠀⠀  ˖ ⿴݃ \n⠀ **{self.sep_time.value}**      ━─      ˚̩̩̥·       {self.urgency.value}⠀⠀**{self.notification.value}**⠀  ⋆ ⁺"
+                f"_ _⠀⠀⠀⠀ི✿   ͚֯ ⠀⠀   ┼┼         {user.mention}      ◯ ⠀⠀ ˚\n♥︎ʕ•͓͡•ʔ<:surveycorps:1372037777922719787>  ⠀   ׅ      ⠀{current_channel.mention}  ⠀⠀⠀⠀  ˖ ⿴݃ \n_ _⠀⠀⠀⠀**{self.sep_time.value}**      ━─      ˚̩̩̥·       {self.urgency.value}⠀⠀**{self.notification.value}**⠀  ⋆ ⁺"
             )
         try:
             await current_channel.edit(name=f"{user.name}﹕{self.sep_time.value}﹕{self.notification.value}")
