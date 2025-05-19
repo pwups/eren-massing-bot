@@ -205,7 +205,7 @@ class QuizView(discord.ui.View):
         
 # ----- Slash Commands -----
 @bot.tree.command(name="freedom", description="this is freedom　 ֪  ׂ ୭")
-async def lose(interaction: discord.Interaction):
+async def freedom(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
     guild = interaction.guild
     user = interaction.user
@@ -236,7 +236,7 @@ async def lose(interaction: discord.Interaction):
     )
 
 @bot.tree.command(name="dreams", description="see you later, eren　 ֪  ׂ ୭")
-async def nobody(interaction: discord.Interaction):
+async def dreams(interaction: discord.Interaction):
     embed = discord.Embed()
     embed.set_image(url="https://media.discordapp.net/attachments/1371835441010966558/1372065583008317583/IMG_3859.jpg?ex=68256b26&is=682419a6&hm=c87fab666f9625b4141e490b73413f7c509b9bd76487499c2b147d2207d7235e&=&format=webp&width=550&height=309")
     await interaction.response.send_message(
@@ -326,6 +326,7 @@ async def regret(
     type: str,
     link: str
 ):
+    
     await interaction.response.defer(ephemeral=True)
 
     user = interaction.user
