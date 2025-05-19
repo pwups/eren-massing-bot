@@ -370,13 +370,17 @@ async def sep_over(ctx):
 
 @bot.tree.command(name="cruel", description="this world is cruel but i still love you　 ֪  ׂ ୭")
 async def cruel(interaction: discord.Interaction):
+    await interaction.response.defer()  # Immediately tell Discord you're working
+
     embed = discord.Embed()
-    embed.set_image(url=image_links[0])  # Start image
-    await interaction.response.send_message(
+    embed.set_image(url=image_links[0])
+
+    message = await interaction.followup.send(  # use followup after deferring
         content="_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _",
-        embed=embed
+        embed=embed,
+        wait=True
     )
-    message = await interaction.original_response()
+
     await asyncio.sleep(7)
     await send_question(interaction, message, 0, 0)
 
