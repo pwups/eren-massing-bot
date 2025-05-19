@@ -302,7 +302,7 @@ class CloseTicketView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
-    @discord.ui.button(label="", style=discord.ButtonStyle.danger, emoji="<a:bluespinningheart:1367355716569923644>", custom_id="close_ticket")
+    @discord.ui.button(label="", style=discord.ButtonStyle.danger, emoji="<a:b_heartwings2:1373848451644919932>", custom_id="close_ticket")
     async def close_ticket(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer()  # Acknowledge the click immediately
         await interaction.channel.delete()
