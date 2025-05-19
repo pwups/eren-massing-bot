@@ -105,12 +105,14 @@ class BreathingModal(discord.ui.Modal, title="໒݂ ◞ . ◟ ིྀ১"):
         )
 
 class ClickButton(discord.ui.View):
-    def __init__(self, original_message):
+    def __init__(self, original_message=None):
         super().__init__(timeout=None)
         self.original_message = original_message
 
     @discord.ui.button(label="ㅤclickㅤ⠀⸺ㅤ⠀꒱ྀི⠀⠀❀ㅤ", style=discord.ButtonStyle.secondary)
     async def click_me_button(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if self.original_message is None:
+            self.original_message = await interaction.channel.fetch_message(interaction.message.id)
         await interaction.response.send_modal(BreathingModal(self.original_message))
 
 # ----- Notification Modal -----
