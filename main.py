@@ -324,7 +324,7 @@ async def regret(
     type: str,
     link: str
 ):
-    await interaction.response.defer(ephemeral=True)  # just defers, not the message that follows
+    await interaction.response.defer()
 
     user = interaction.user
     guild = interaction.guild
