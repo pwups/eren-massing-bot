@@ -396,7 +396,8 @@ async def send_question(interaction, message, index, score):
 # ----- Events -----
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
+    await bot.tree.sync()
+    print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     try:
         synced = await bot.tree.sync()
         print(f"Synced {len(synced)} slash commands.")
