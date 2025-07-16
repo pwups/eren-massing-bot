@@ -27,44 +27,6 @@ REQUIRED_ROLE_ID = 1372051652952981636
 DARK_GRAY = discord.Color.from_str("#20202A")
 BLUE = discord.Color.from_str("#455F5B")
 
-quiz_questions = [
-    {
-        "question": "what is the name of eren's hometown?",
-        "options": ["trost", "shiganshina", "stohess", "marley"],
-        "answer": "shiganshina"
-    },
-    {
-        "question": "what motivates eren to join the scouts?",
-        "options": ["to become a titan", "to impress mikasa", "to see the ocean", "to kill all titans"],
-        "answer": "to kill all titans"
-    },
-    {
-        "question": "what is the first titan eren transforms into?",
-        "options": ["attack", "colossal", "beast", "founding"],
-        "answer": "attack"
-    },
-    {
-        "question": "what is the key eren receives from his father for?",
-        "options": ["unlocking armory", "opening a secret tunnel", "accessing the basement", "controlling titans"],
-        "answer": "accessing the basement"
-    },
-    {
-        "question": "<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>what shocking truth does\n<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>eren learn from the basement?",
-        "options": ["titans are immortal", "marley is behind the titan attacks", "the world outside is destroyed", "titans come from another dimension"],
-        "answer": "marley is behind the titan attacks"
-    }
-]
-
-image_links = [
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773129730428999/67118f1c0ceca504215f470428424d41.jpg",
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773130145529867/0671f2f689a7fba49e8e4eec7424f770.jpg",
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773130540060672/79a8a782a59e35f524b30668a21245ab.jpg",
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773130955292672/0dd66fd2f6466803e436faad9aa3ee36.jpg",
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773131316007012/620f704ca507446c7da23e46340429b7.jpg",
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773131873583104/2745509cbaf708c7516c5e9220322417.jpg",
-    "https://cdn.discordapp.com/attachments/1314990342814306406/1371773132251201536/0e4e6ce7ee89c34ce901cf79b9a5c786.jpg"
-]
-
 # ----- Lose Modal -----
 class BreathingModal(discord.ui.Modal, title="໒݂ ◞ . ◟ ིྀ১"):
     server_ad = discord.ui.TextInput(
@@ -176,32 +138,6 @@ class RegretButtonView(discord.ui.View):
             "_ _\n\n    <:bird:1372061833204207648>  result  has  been  **sent**  ♡\n     ₊   click button to close ticket\n\n_ _",
             view=CloseTicketView()  # 👈 close button included here
         )
-
-class QuizSelect(discord.ui.Select):
-    def __init__(self, question_data, index, score, message, interaction):
-        self.correct_answer = question_data["answer"]
-        self.score = score
-        self.index = index
-        self.message = message
-        self.interaction = interaction
-        options = [discord.SelectOption(label=o) for o in question_data["options"]]
-        super().__init__(placeholder="𝐜𝐡𝐨𝐨𝐬𝐞 𝐲𝐨𝐮𝐫 𝐚𝐧𝐬𝐰𝐞𝐫 ✟", min_values=1, max_values=1, options=options)
-
-    async def callback(self, interaction: Interaction):
-        if interaction.user != self.interaction.user:
-            await interaction.response.send_message("You're not allowed to answer this quiz.", ephemeral=True)
-            return
-
-        if self.values[0] == self.correct_answer:
-            self.score += 1
-
-        await interaction.response.defer()
-        await send_question(self.interaction, self.message, self.index + 1, self.score)
-
-class QuizView(discord.ui.View):
-    def __init__(self, question_data, index, score, message, interaction):
-        super().__init__(timeout=60)
-        self.add_item(QuizSelect(question_data, index, score, message, interaction))
         
 # ----- Slash Commands -----
 @bot.tree.command(name="freedom", description="this is freedom　 ֪  ׂ ୭")
@@ -372,30 +308,9 @@ async def sep_over(ctx):
 async def cruel(interaction: discord.Interaction):
     await interaction.response.defer()  # Immediately tell Discord you're working
 
-    embed = discord.Embed()
-    embed.set_image(url=image_links[0])
-
-    message = await interaction.followup.send(  # use followup after deferring
-        content="_ _\n\n　　　　　　　◞  ⊹  <:wbows:1372044095912022026>  ⊹  ◟\n_ _　 　　　　**quiz!** get all correct for __ovn__.\n\n_ _",
-        embed=embed,
-        wait=True
+    await interaction.followup.send(
+        f"_ _\n<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:eren:1373952750261374997>⁺<:z_invisibleemt:1372062781603446807> *but  i  __still__  **love**  you.*\n-# _ _<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>~~   ~~ **Akuma No Ko.**<:z_invisibleemt:1372062781603446807> **Ai Higuchi**\n_ _ [⠀](https://open.spotify.com/track/5cRKj1kynNFqiliT2ndZ3y?si=555b2e85b1734e89 )"
     )
-
-    await asyncio.sleep(7)
-    await send_question(interaction, message, 0, 0)
-
-async def send_question(interaction, message, index, score):
-    if index >= len(quiz_questions):
-        embed = discord.Embed()
-        embed.set_image(url=image_links[-1])
-        await message.edit(content=f"_ _\n\n　　　　　　ৎ ⠀⟡₊⠀ you got **{score} / {len(quiz_questions)}** <a:spins:1372397905637539860>\n\n_ _", embed=embed, view=None)
-        return
-
-    question_data = quiz_questions[index]
-    embed = discord.Embed()
-    embed.set_image(url=image_links[index + 1])
-    view = QuizView(question_data, index, score, message, interaction)
-    await message.edit(content=f"<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>{question_data['question']}", embed=embed, view=view)
 
 # ----- Events -----
 @bot.event
