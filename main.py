@@ -28,7 +28,7 @@ DARK_GRAY = discord.Color.from_str("#20202A")
 BLUE = discord.Color.from_str("#455F5B")
 
 # ----- Lose Modal -----
-class BreathingModal(discord.ui.Modal, title="໒݂ ◞ . ◟ ིྀ১"):
+class BreathingModal(discord.ui.Modal, title="₊　˙ㅤinfo"):
     server_ad = discord.ui.TextInput(
         label="ㅤ❀ ㅤ ⊹˚ㅤserverㅤad",
         placeholder="ㅤ.ㅤno spoiler walls",
@@ -57,7 +57,7 @@ class BreathingModal(discord.ui.Modal, title="໒݂ ◞ . ◟ ིྀ১"):
 
     async def on_submit(self, interaction: discord.Interaction):
         await interaction.response.defer()
-        thread = await self.original_message.create_thread(name="(⁠｡⁠•́⁠︿⁠•̀⁠｡⁠)")
+        thread = await self.original_message.create_thread(name="⁺  .  ♡  ⁺  .")
         embed = discord.Embed(description=f"```{self.server_ad.value}```", color=DARK_GRAY)
         await thread.send(content=self.server_ad.value, embed=embed)
         await thread.send(self.invite_link.value)
@@ -71,29 +71,17 @@ class ClickButton(discord.ui.View):
         super().__init__(timeout=None)
         self.original_message = original_message
 
-    @discord.ui.button(label="ㅤclickㅤ⠀⸺ㅤ⠀꒱ྀི⠀⠀❀ㅤ", style=discord.ButtonStyle.secondary)
+    @discord.ui.button(label="ㅤclickㅤ⠀‿︵⠀⠀ㅤ⟡ㅤ", style=discord.ButtonStyle.secondary)
     async def click_me_button(self, interaction: discord.Interaction, button: discord.ui.Button):
         if self.original_message is None:
             self.original_message = await interaction.channel.fetch_message(interaction.message.id)
         await interaction.response.send_modal(BreathingModal(self.original_message))
 
 # ----- Notification Modal -----
-class NotificationModal(discord.ui.Modal, title="(⁠ྀི´⁠ > ⁠.̫⁠ ⁠< ⁠`⁠)ᓯྀ"):
+class NotificationModal(discord.ui.Modal, title="₊　˙ㅤmassed"):
     notification = discord.ui.TextInput(
         label="ㅤ❀ ㅤ ⊹˚ㅤnotification",
         placeholder="ㅤ.ㅤping / dm",
-        required=True,
-        style=discord.TextStyle.short
-    )
-    urgency = discord.ui.TextInput(
-        label="ㅤ❀ ㅤ ⊹˚ㅤurgency",
-        placeholder="ㅤ.ㅤno need to lie",
-        required=True,
-        style=discord.TextStyle.short
-    )
-    sep_time = discord.ui.TextInput(
-        label="ㅤ❀ ㅤ ⊹˚ㅤsepㅤtime",
-        placeholder="ㅤ.ㅤbatch / 1h / 2h / ovn || ovn = urg paids only",
         required=True,
         style=discord.TextStyle.short
     )
@@ -105,10 +93,10 @@ class NotificationModal(discord.ui.Modal, title="(⁠ྀི´⁠ > ⁠.̫⁠ ⁠
         target_channel = interaction.guild.get_channel(TARGET_CHANNEL_ID_NOTIFICATION)
         if target_channel:
             await target_channel.send(
-                f"_ _⠀⠀⠀⠀ི✿   ͚֯ ⠀⠀   ┼┼         {user.mention}      ◯ ⠀⠀ ˚\n♥︎ʕ•͓͡•ʔ<:surveycorps:1372037777922719787>  ⠀   ׅ      ⠀{current_channel.mention}  ⠀⠀⠀⠀  ˖ ⿴݃ \n_ _⠀⠀⠀⠀**{self.sep_time.value}**      ━─      ˚̩̩̥·       {self.urgency.value}⠀⠀**{self.notification.value}**⠀  ⋆ ⁺"
+                f"_ _\n　　　　　⋅.˳˳.⋅ॱ˙　 　 ✿　 　 {user.mention}\n　　　　　**ovn**　　₊　　<a:002_yellowwatch:1374302432003096656>　　⣓\n　　　　　—　　{current_channel.mention}　　⊹\n_ _"
             )
         try:
-            await current_channel.edit(name=f"{user.name}﹕{self.sep_time.value}﹕{self.notification.value}")
+            await current_channel.edit(name=f"ovn﹕{user.name}—{self.notification.value}")
         except discord.Forbidden:
             await interaction.followup.send("I don't have permission to edit the channel name.", ephemeral=True)
             return
@@ -120,7 +108,7 @@ class NotificationModal(discord.ui.Modal, title="(⁠ྀི´⁠ > ⁠.̫⁠ ⁠
         )
 
 class ClickMeView(discord.ui.View):
-    @discord.ui.button(label="ㅤshingeki no kyojin . . .ㅤ", style=discord.ButtonStyle.secondary)
+    @discord.ui.button(label="ㅤㅤshingekiㅤnoㅤkyojinㅤㅤ", style=discord.ButtonStyle.secondary)
     async def click_me(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_modal(NotificationModal())
 
@@ -140,7 +128,7 @@ class RegretButtonView(discord.ui.View):
         )
         
 # ----- Slash Commands -----
-@bot.tree.command(name="freedom", description="this is freedom　 ֪  ׂ ୭")
+@bot.tree.command(name="freedom", description="：　start massing")
 async def freedom(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
     guild = interaction.guild
@@ -158,10 +146,10 @@ async def freedom(interaction: discord.Interaction):
     channel = await guild.create_text_channel(name=f"w﹕{user.name}", category=category, overwrites=overwrites)
 
     embed = discord.Embed(
-        description="<:invisible_emt:1372062781603446807>\n<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>๑ï ⠀  🕊️ ⠀ #chapter      ∗     ִ\n<:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807><:invisible_emt:1372062781603446807>❀✿     ⠀—‿‿—       __**139**__\n<:invisible_emt:1372062781603446807>",
+        description="<:z_invisibleemt:1372062781603446807>\n<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>♡︎ㅤㅤ**chapter**ㅤㅤ⧦⧦ㅤㅤ🕊️ㅤㅤ*#139.*\n-# _ _<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>૮꒰ “◜ .◝ ꒱აㅤㅤToward  The  Tree  On  That  Hill\n<:z_invisibleemt:1372062781603446807>",
         color=DARK_GRAY
     )
-    embed.set_image(url="https://media.discordapp.net/attachments/1371835441010966558/1372065577144811591/IMG_3860.jpg?ex=68256b25&is=682419a5&hm=c1acd7cc0e5f43214e7145e788a5fd2039ef545d9051cba9e806029b76526608&=&format=webp&width=1056&height=595")
+    embed.set_image(url="https://cdn.discordapp.com/attachments/1372031090923012116/1395331666121326652/Untitled242_20250717170922.png?ex=687a0f61&is=6878bde1&hm=1494db19e186314eaf9f0684ca5537bdf47bc7fdfac648a42b77ad26c57543b6&")
 
     view = ClickButton(None)
     message = await channel.send(embed=embed, view=view)
@@ -171,12 +159,12 @@ async def freedom(interaction: discord.Interaction):
         f"_ \n\n\n _　　　　<:eren4:1372394683501776967>          ⁺     ⊹\n_ _　　　　{channel.mention}\n\n\n_ _"
     )
 
-@bot.tree.command(name="dreams", description="see you later, eren　 ֪  ׂ ୭")
+@bot.tree.command(name="dreams", description="：　finished")
 async def dreams(interaction: discord.Interaction):
     embed = discord.Embed()
-    embed.set_image(url="https://media.discordapp.net/attachments/1371835441010966558/1372065583008317583/IMG_3859.jpg?ex=68256b26&is=682419a6&hm=c87fab666f9625b4141e490b73413f7c509b9bd76487499c2b147d2207d7235e&=&format=webp&width=550&height=309")
+    embed.set_image(url="https://tenor.com/view/eren-why-are-you-crying-gif-17830961909432728889")
     await interaction.response.send_message(
-        content="_ _\n　　　✧ ‿︵ 　~~    　~~ 　戦わなければ勝てない。\n_ _",
+        content="_ _\n-# _ _　　　　　✧ ‿︵ 　~~    　~~ 　**戦わなければ勝てない。**\n_ _",
         embed=embed,
         view=ClickMeView()
     )
@@ -247,7 +235,7 @@ class CloseTicketView(discord.ui.View):
 
 @bot.tree.command(
     name="right",
-    description="being right means believing strongly in yourself　 ֪  ׂ ୭"
+    description="：　invites gained"
 )
 @app_commands.describe(
     invites=". invites gained",
@@ -291,7 +279,7 @@ async def regret(
 
 @bot.command(name="a")
 async def approve(ctx):
-    await ctx.send("_ _\n⠀ ⠀⠀⠀⏝ི⠀⠀⠀  ⠀❤︎⠀⠀⠀𝐜𝐡𝐞𝐜𝐤𝐩𝐨𝐢𝐧𝐭𝐬ㅤ[required](https://discord.gg/SAzqaQuCQA )\n⠀⠀⠀⠀𝐧𝐨𝐭 𝐩𝐨𝐬𝐭𝐢𝐧𝐠 𝐲𝐞𝐭 = 𝐝𝐨𝐧'𝐭 𝐣𝐨𝐢𝐧⠀⠀<:eren:1372038577940074608>◌⠀  ゜\n⠀⠀⠀   ৴৴    ׄ  ⠀⠀  __24h __    to    post,     **1d   max**   ext.\n_ _")
+    await ctx.send("_ _\n<:z_invisibleemt:1372062781603446807>尊敬        ꒰৯        **checkpoints  required**\n-# _ _ ✦　　`24h`  to  post　　═╬　　`1d`  max  ext.　　<:key:1374088453788139580>\n_ _ [⠀](https://discord.gg/4sYuPUsG )")
 
 @bot.command(name="d")
 async def sep_over(ctx):
@@ -304,7 +292,7 @@ async def sep_over(ctx):
     except Exception as e:
         await ctx.send(f"An error occurred: {e}", delete_after=5)
 
-@bot.tree.command(name="cruel", description="this world is cruel but i still love you　 ֪  ׂ ୭")
+@bot.tree.command(name="cruel", description="：　checkpoint")
 async def cruel(interaction: discord.Interaction):
     await interaction.response.defer()  # Immediately tell Discord you're working
 
