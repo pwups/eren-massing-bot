@@ -162,9 +162,9 @@ async def freedom(interaction: discord.Interaction):
 @bot.tree.command(name="dreams", description="：　finished")
 async def dreams(interaction: discord.Interaction):
     embed = discord.Embed()
-    embed.set_image(url="https://cdn.discordapp.com/attachments/1372031090923012116/1395346602490859540/eren-why-are-you-crying.gif?ex=687a1d4a&is=6878cbca&hm=0c2ce01c7bfba713dc9b944d88559ab94b42246e47d7d7ecb16b918c6afbbf61&")
+    embed.set_image(url="https://media.discordapp.net/attachments/1314990342814306406/1378221492642517002/8108d0ccf534f9e513eec6d45f37f051.gif?ex=6879c6c9&is=68787549&hm=0733e5d1f10b50b498d4b2551aec241dc16dbe38240c208a1ba535d2abd0a250&=")
     await interaction.response.send_message(
-        content="_ _\n-# _ _　　　　　　✧ ‿︵ 　~~    　~~ 　**戦わなければ勝てない。**\n_ _",
+        content="_ _\n-# _ _　　　　　　　　✧ ‿︵ 　~~    　~~ 　**戦わなければ勝てない。**\n_ _",
         embed=embed,
         view=ClickMeView()
     )
