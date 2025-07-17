@@ -146,7 +146,7 @@ async def freedom(interaction: discord.Interaction):
     channel = await guild.create_text_channel(name=f"w﹕{user.name}", category=category, overwrites=overwrites)
 
     embed = discord.Embed(
-        description="<:z_invisibleemt:1372062781603446807>\n<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>♡︎ㅤㅤ**chapter**ㅤㅤ⧦⧦ㅤㅤ🕊️ㅤㅤ*#139.*\n-# _ _<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>૮꒰ “◜ .◝ ꒱აㅤㅤToward  The  Tree  On  That  Hill\n<:z_invisibleemt:1372062781603446807>",
+        description="<:z_invisibleemt:1372062781603446807>\n<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>♡︎ㅤㅤ**chapter**ㅤㅤ⧦⧦ㅤㅤ🕊️ㅤㅤ*#139.*\n-# _ _<:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807><:z_invisibleemt:1372062781603446807>૮꒰ “◜ .◝ ꒱აㅤㅤToward  The  Tree  On  That  Hill\n<:z_invisibleemt:1372062781603446807>",
         color=DARK_GRAY
     )
     embed.set_image(url="https://cdn.discordapp.com/attachments/1372031090923012116/1395331666121326652/Untitled242_20250717170922.png?ex=687a0f61&is=6878bde1&hm=1494db19e186314eaf9f0684ca5537bdf47bc7fdfac648a42b77ad26c57543b6&")
